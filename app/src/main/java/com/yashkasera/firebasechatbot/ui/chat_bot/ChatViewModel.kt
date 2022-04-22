@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.yashkasera.firebasechatbot.MainActivity.Companion.auth
 import com.yashkasera.firebasechatbot.repository.model.MessageModel
 import com.yashkasera.firebasechatbot.repository.model.RetrofitService
 import com.yashkasera.firebasechatbot.ui.adapter.MessageAdapter
@@ -39,7 +40,10 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         isLoading.set(true)
         viewModelScope.launch {
             try {
-                val res = retrofitService.getKeywords(msg = message)
+                val res = retrofitService.getKeywords(
+                    msg = message,
+                    uid = auth.currentUser?.uid ?: "1"
+                )
                 isLoading.set(false)
                 if (res.isSuccessful) {
                     res.body()?.let {
