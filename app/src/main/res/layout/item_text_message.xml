@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="messageItem"
+            type="com.yashkasera.firebasechatbot.repository.model.MessageModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginVertical="@dimen/margin_extra_small">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_adb_24"
+            android:drawablePadding="@dimen/margin_extra_small"
+            android:drawableTint="@color/white_primary"
+            android:gravity="center"
+            android:padding="@dimen/margin_extra_small"
+            android:text="@{messageItem.sender}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:visibility="@{messageItem.sender==null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/card"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/dark_blue_secondary"
+            app:cardCornerRadius="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:contentPadding="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sender"
+            app:layout_constraintWidth_max="250dp"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{messageItem.message}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                tools:text="How are you?" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{messageItem.getTime()}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            app:layout_constraintEnd_toEndOf="@id/card"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@id/card"
+            app:layout_constraintTop_toBottomOf="@id/card"
+            tools:text="@tools:sample/date/hhmmss" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
